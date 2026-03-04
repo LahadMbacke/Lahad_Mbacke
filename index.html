@@ -3,725 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baye Lahad Mbacke — NLP Researcher</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #fafaf8;
-            --bg2: #f3f2ee;
-            --ink: #1a1916;
-            --ink2: #4a4740;
-            --muted: #9a9690;
-            --accent: #c0432a;
-            --accent2: #3a6b8a;
-            --border: #e2e0db;
-            --border2: #ccc9c2;
-        }
+    <link rel="stylesheet" href="style.css">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
 
-        body {
-            font-family: 'Source Serif 4', Georgia, serif;
-            background: var(--bg);
-            color: var(--ink);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    <title>Baye Lahad Mbacke</title>
 
-        .sidebar {
-            position: fixed;
-            left: 0; top: 0;
-            width: 260px;
-            height: 100vh;
-            background: var(--bg);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 52px 36px;
-            z-index: 100;
-            animation: fadeIn 0.7s ease both;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .sidebar-initial {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 300;
-            color: var(--accent);
-            line-height: 1;
-            letter-spacing: -2px;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--ink);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-role {
-            font-family: 'DM Mono', monospace;
-            font-size: 9.5px;
-            color: var(--muted);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 44px;
-        }
-
-        .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            flex: 1;
-        }
-
-        .nav a {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-decoration: none;
-            padding: 9px 12px;
-            border-radius: 2px;
-            transition: all 0.2s;
-            border-left: 2px solid transparent;
-        }
-
-        .nav a:hover { color: var(--ink); background: var(--bg2); }
-        .nav a.active { color: var(--accent); border-left-color: var(--accent); background: #fdf0ed; }
-
-        .sidebar-links {
-            border-top: 1px solid var(--border);
-            padding-top: 28px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            color: var(--muted);
-            text-decoration: none;
-            letter-spacing: 0.8px;
-            transition: color 0.2s;
-        }
-
-        .sidebar-link:hover { color: var(--accent); }
-        .sidebar-link svg { width: 13px; height: 13px; flex-shrink: 0; }
-
-        .main {
-            margin-left: 260px;
-            padding: 72px 96px 80px 80px;
-            max-width: 1100px;
-        }
-
-        .hero {
-            margin-bottom: 88px;
-            animation: fadeUp 0.8s 0.15s ease both;
-        }
-
-        .hero-eyebrow {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            color: var(--accent);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .hero-eyebrow::after {
-            content: '';
-            height: 1px;
-            width: 48px;
-            background: var(--accent);
-            opacity: 0.4;
-            display: inline-block;
-        }
-
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(52px, 5.5vw, 82px);
-            font-weight: 300;
-            line-height: 1.02;
-            color: var(--ink);
-            letter-spacing: -2px;
-            margin-bottom: 36px;
-        }
-
-        .hero-title strong { font-weight: 700; }
-        .hero-title em { font-style: italic; color: var(--accent); }
-
-        .hero-bio {
-            font-size: 16.5px;
-            line-height: 1.85;
-            color: var(--ink2);
-            max-width: 540px;
-            margin-bottom: 36px;
-            font-weight: 300;
-        }
-
-        .hero-bio b { font-weight: 600; color: var(--ink); }
-
-        .hero-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .pill {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            color: var(--ink2);
-            background: var(--bg2);
-            border: 1px solid var(--border2);
-            border-radius: 2px;
-            padding: 8px 14px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            transition: all 0.2s;
-        }
-
-        .pill:hover { color: var(--accent); border-color: var(--accent); background: #fdf0ed; }
-        .pill svg { width: 12px; height: 12px; }
-
-        .pill-cta { background: var(--accent); color: #fff; border-color: var(--accent); }
-        .pill-cta:hover { background: #a8371f; border-color: #a8371f; color: #fff; }
-
-        .section { margin-bottom: 80px; animation: fadeUp 0.8s 0.3s ease both; }
-
-        .section-head {
-            display: flex;
-            align-items: baseline;
-            gap: 20px;
-            margin-bottom: 44px;
-        }
-
-        .section-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 9px;
-            color: var(--muted);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .section-rule { height: 1px; background: var(--border); flex: 1; margin-bottom: 2px; }
-
-        .research-card {
-            border: 1px solid var(--border);
-            border-top: 3px solid var(--accent);
-            background: #fff;
-            padding: 40px 44px;
-        }
-
-        .research-quote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-style: italic;
-            line-height: 1.9;
-            color: var(--ink2);
-            font-weight: 300;
-            max-width: 640px;
-        }
-
-        .research-quote strong { font-style: normal; font-weight: 600; color: var(--ink); }
-
-        .research-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 28px;
-        }
-
-        .research-tag {
-            font-family: 'DM Mono', monospace;
-            font-size: 9.5px;
-            color: var(--accent2);
-            background: #eef4f8;
-            border: 1px solid #c8dce8;
-            border-radius: 2px;
-            padding: 5px 10px;
-            letter-spacing: 0.5px;
-        }
-
-        .timeline { display: flex; flex-direction: column; }
-
-        .tl-item {
-            display: grid;
-            grid-template-columns: 110px 1fr;
-            gap: 0 36px;
-            padding-bottom: 44px;
-            position: relative;
-        }
-
-        .tl-item:last-child { padding-bottom: 0; }
-
-        .tl-item::after {
-            content: '';
-            position: absolute;
-            left: 110px;
-            top: 9px;
-            bottom: 0;
-            width: 1px;
-            background: var(--border);
-        }
-
-        .tl-item:last-child::after { display: none; }
-
-        .tl-dot {
-            position: absolute;
-            left: 105px;
-            top: 5px;
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 2px solid var(--accent);
-            z-index: 2;
-        }
-
-        .tl-date {
-            font-family: 'DM Mono', monospace;
-            font-size: 9.5px;
-            color: var(--muted);
-            letter-spacing: 0.8px;
-            line-height: 1.5;
-            padding-top: 3px;
-            text-align: right;
-        }
-
-        .tl-body { padding-left: 24px; }
-
-        .tl-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 21px;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 3px;
-            line-height: 1.2;
-        }
-
-        .tl-inst {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            color: var(--accent2);
-            letter-spacing: 0.8px;
-            margin-bottom: 3px;
-        }
-
-        .tl-loc {
-            font-family: 'DM Mono', monospace;
-            font-size: 9.5px;
-            color: var(--muted);
-            margin-bottom: 12px;
-        }
-
-        .tl-desc {
-            font-size: 14.5px;
-            line-height: 1.8;
-            color: var(--ink2);
-            font-weight: 300;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-        }
-
-        .skill-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            padding: 24px 22px;
-            transition: border-color 0.2s, transform 0.2s;
-        }
-
-        .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-
-        .skill-card-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 9px;
-            color: var(--accent);
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-        }
-
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-        .skill-tag {
-            font-family: 'DM Mono', monospace;
-            font-size: 9.5px;
-            color: var(--ink2);
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            padding: 4px 9px;
-            border-radius: 2px;
-        }
-
-        .lang-row {
-            display: flex;
-            gap: 0;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .lang-item {
-            flex: 1;
-            padding: 24px 28px;
-            border-right: 1px solid var(--border);
-        }
-
-        .lang-item:last-child { border-right: none; }
-
-        .lang-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 4px;
-        }
-
-        .lang-level {
-            font-family: 'DM Mono', monospace;
-            font-size: 9.5px;
-            color: var(--muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        footer {
-            margin-top: 64px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-            font-family: 'DM Mono', monospace;
-            font-size: 9.5px;
-            color: var(--muted);
-            letter-spacing: 0.8px;
-            display: flex;
-            gap: 16px;
-        }
-
-        footer a { color: var(--accent); text-decoration: none; }
-
-        @media (max-width: 860px) {
-            .sidebar {
-                position: static;
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                flex-wrap: wrap;
-                padding: 28px 24px;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-                gap: 20px;
-                align-items: flex-start;
-            }
-
-            .nav { flex-direction: row; flex-wrap: wrap; flex: none; gap: 4px; }
-            .nav a { border-left: none; border-bottom: 2px solid transparent; }
-            .nav a.active { border-bottom-color: var(--accent); background: none; }
-            .sidebar-links { flex-direction: row; border-top: none; padding-top: 0; }
-
-            .main { margin-left: 0; padding: 36px 24px 64px; }
-            .tl-item { grid-template-columns: 80px 1fr; gap: 0 20px; }
-            .hero-title { letter-spacing: -1px; }
-            .lang-row { flex-direction: column; }
-            .lang-item { border-right: none; border-bottom: 1px solid var(--border); }
-            .lang-item:last-child { border-bottom: none; }
-        }
-    </style>
 </head>
 <body>
-
-<aside class="sidebar">
-    <div>
-        <div class="sidebar-initial">BLM</div>
-        <div class="sidebar-name">Baye Lahad Mbacke</div>
-        <div class="sidebar-role">PhD · NLP Researcher</div>
-    </div>
-
     <nav class="nav">
-        <a href="#about" class="active">About</a>
-        <a href="#research">Research</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="Resume_PHD.pdf" target="_blank">CV ↗</a>
+        <a href="#" class="active">Home</a>
+       <!-- <a href="#">Research</a>
+        <a href="#">Publications</a>
+        <a href="#">Code & Data</a>
+        <a href="#">Students</a>
+        <a href="#">Service</a> -->
+         <a href="Resume_PHD.pdf" target="_blank">CV</a>
     </nav>
 
-    <div class="sidebar-links">
-        <a href="mailto:lahadmbacke00@gmail.com" class="sidebar-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            lahadmbacke00@gmail.com
-        </a>
-        <a href="https://linkedin.com/in/baye-lahad-mbacke" target="_blank" class="sidebar-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7"/></svg>
-            LinkedIn
-        </a>
-        <a href="https://github.com/LahadMbacke" target="_blank" class="sidebar-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-            GitHub
-        </a>
-        <a href="https://huggingface.co/Lahad" target="_blank" class="sidebar-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-            Hugging Face
-        </a>
-        <a href="tel:0601328022" class="sidebar-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            06 01 32 80 22
-        </a>
-    </div>
-</aside>
+    <div class="header">
+        <h1 class="name">Baye Lahad Mbacke</h1>
+        <a href="mailto:lahadmbacke00@gmail.com" class="email">lahadmbacke00@gmail.com</a>
+        
+        <div class="contact-info">
+            <span>📱 06 01 32 80 22</span>
+            <span>📍 8 boulevard mendes france, Nantes, France</span>
+            <span>💼 <a href="https://linkedin.com/in/baye-lahad-mbacke" style="color: #0066cc;">LinkedIn</a></span>
+            <span>🔗 <a href="https://github.com/LahadMbacke" style="color: #0066cc;">GitHub</a></span>
+            <span>🤗 <a href="https://huggingface.co/Lahad" style="color: #0066cc;">Hugging Face</a></span>
 
-<main class="main">
-
-    <section id="about" class="hero">
-        <div class="hero-eyebrow">Nantes University · LS2N</div>
-        <h1 class="hero-title">
-            <strong>Natural Language</strong><br>
-            Processing &<br>
-            <em>Frugal AI.</em>
-        </h1>
-        <p class="hero-bio">
-            PhD student at Nantes University, working on <b>efficient and frugal methods</b> for the automatic extraction and structuring of cultural event information — connecting cultural industries with their audiences through language technology.
+        </div>
+        
+        <p class="bio">
+            I am a Phd student at Nantes University, my work focused on efficient and frugal 
+            methods for the automatic extraction and structuring of cultural event information
+            to connect cultural industries with audiences.
         </p>
-        <div class="hero-pills">
-            <a href="mailto:lahadmbacke00@gmail.com" class="pill">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-                Email
-            </a>
-            <a href="https://linkedin.com/in/baye-lahad-mbacke" target="_blank" class="pill">LinkedIn</a>
-            <a href="https://github.com/LahadMbacke" target="_blank" class="pill">GitHub</a>
-            <a href="https://huggingface.co/Lahad" target="_blank" class="pill">Hugging Face</a>
-            <a href="Resume_PHD.pdf" target="_blank" class="pill pill-cta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Download CV
-            </a>
-        </div>
-    </section>
+        
+        <!-- <p class="trajectory">
+            <strong>trajectory:</strong> Bachelor's in Mathematics-Computer Science at <span><a href="https://www.ucad.sn/" style="color: #0066cc;">Cheikh Anta Diop University Dakar (Senegal)</a></span>, 
+            → Bachelor's in Computer Science at <span><a href="https://www.unistra.fr/" style="color: #0066cc;">University of Strasbourg (France)</a></span>
+            → Master's student in ATAL at <span><a href="https://www.univ-nantes.fr/" style="color: #0066cc;">Nantes University (France)</a></span> → Research intern at <span><a href="https://www.ls2n.fr/equipe/taln/" style="color: #0066cc;">Laboratoire des sciences du numérique de Nantes</a></span>
+            → Assistant Data Scientist | R&D at <span><a href="https://www.ouest-france.fr/" style="color: #0066cc;">Ouest-France (France).</a></span>
+            → PhD student at <span><a href="https://www.univ-nantes.fr/" style="color: #0066cc;">Nantes University (France)</a></span>, within the <span><a href="https://www.ls2n.fr/equipe/taln/" style="color: #0066cc;">Laboratoire des Sciences du Numérique de Nantes (LS2N)</a></span>.
+        </p> -->
+    </div>
 
-    <section id="research" class="section">
-        <div class="section-head">
-            <span class="section-label">Research Focus</span>
-            <div class="section-rule"></div>
-        </div>
-        <div class="research-card">
-            <p class="research-quote">
-                My doctoral work develops <strong>frugal, efficient NLP pipelines</strong> for automatically extracting and structuring cultural event data from unstructured text — bridging cultural industries with audiences <strong>without the computational overhead</strong> of large-scale models.
-                <br><br>
-                Core areas include named entity recognition, entity linking, information extraction, knowledge graph construction, and low-resource NLP.
-            </p>
-            <div class="research-tags">
-                <span class="research-tag">Named Entity Recognition</span>
-                <span class="research-tag">Entity Linking</span>
-                <span class="research-tag">Information Extraction</span>
-                <span class="research-tag">Knowledge Graphs</span>
-                <span class="research-tag">Efficient NLP</span>
-                <span class="research-tag">Low-Resource Methods</span>
-                <span class="research-tag">Cultural Events</span>
-            </div>
-        </div>
-    </section>
+    <div class="section">
+        <h2>Education</h2>
 
-    <section id="experience" class="section">
-        <div class="section-head">
-            <span class="section-label">Professional Experience</span>
-            <div class="section-rule"></div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-date">Sept. 2024<br>Present</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">Assistant Data Scientist — R&D</div>
-                    <div class="tl-inst">Ouest-France</div>
-                    <div class="tl-loc">Rennes, Brittany, France</div>
-                    <div class="tl-desc">Building geotagging systems for extracting location references from journalistic articles. Developing entity linking pipelines for geographic places and monuments. Leading knowledge extraction projects covering named entity recognition and relationship mapping, with a focus on geographic entity disambiguation for addresses, places, and cities.</div>
+         <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">PhD candidate </div>
+                    <div class="item-institution">Nantes University</div>
+                    <div class="item-location">Nantes, France</div>
                 </div>
+                <div class="item-date">2026</div>
             </div>
-            <div class="tl-item">
-                <div class="tl-date">Jan. 2024<br>May 2024</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">Research Intern</div>
-                    <div class="tl-inst">LS2N — Laboratoire des Sciences du Numérique de Nantes</div>
-                    <div class="tl-loc">Nantes, France</div>
-                    <div class="tl-desc">Comparative analysis of NER systems on press articles. Applied ML techniques for key information extraction, participated in annotation campaigns, and evaluated multiple NLP approaches on structured and unstructured corpora.</div>
+            <div class="item-description">
+            PhD research on efficient and frugal methods for the automatic extraction and structuring of cultural event information to connect cultural industries with audiences.        </div>
+        
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Master ATAL (Machine Learning and Automatic Language Processing)</div>
+                    <div class="item-institution">Nantes University</div>
+                    <div class="item-location">Nantes, France</div>
                 </div>
+                <div class="item-date">2023–2025</div>
             </div>
-            <div class="tl-item">
-                <div class="tl-date">Feb.–Mar. 2024</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">Academic Project — DEFT2013 Competition</div>
-                    <div class="tl-inst">Nantes University</div>
-                    <div class="tl-loc">Nantes, France</div>
-                    <div class="tl-desc">Classification models for recipe categorization (main course, appetizer, dessert) using NLP and ML techniques applied to recipe titles and full instruction texts.</div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">Apr.–May 2023</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">Academic Project — Autoencoders & Classification</div>
-                    <div class="tl-inst">University of Strasbourg</div>
-                    <div class="tl-loc">Strasbourg, France</div>
-                    <div class="tl-desc">Evaluated autoencoders for tabular data classification. Implemented neural networks for data compression, built latent-space representations, and conducted comparative performance analysis.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="education" class="section">
-        <div class="section-head">
-            <span class="section-label">Education</span>
-            <div class="section-rule"></div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-date">2024–2026</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">PhD Candidate</div>
-                    <div class="tl-inst">Nantes University — LS2N</div>
-                    <div class="tl-loc">Nantes, France</div>
-                    <div class="tl-desc">Frugal methods for automatic extraction and structuring of cultural event information to connect cultural industries with audiences.</div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">2023–2025</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">Master ATAL — Machine Learning & NLP</div>
-                    <div class="tl-inst">Nantes University</div>
-                    <div class="tl-loc">Nantes, France</div>
-                    <div class="tl-desc">Specialization in advanced NLP techniques, deep learning architectures, and modern language models.</div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">2022–2023</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">Bachelor's in Computer Science (L3)</div>
-                    <div class="tl-inst">University of Strasbourg</div>
-                    <div class="tl-loc">Strasbourg, France</div>
-                    <div class="tl-desc">Algorithms, programming, and computational theory foundations.</div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">2018–2022</div>
-                <div class="tl-dot"></div>
-                <div class="tl-body">
-                    <div class="tl-title">Bachelor's in Mathematics & Computer Science</div>
-                    <div class="tl-inst">Cheikh Anta Diop University of Dakar</div>
-                    <div class="tl-loc">Dakar, Senegal</div>
-                    <div class="tl-desc">Comprehensive training in mathematical foundations, analytical reasoning, and software development fundamentals.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="section">
-        <div class="section-head">
-            <span class="section-label">Skills & Tools</span>
-            <div class="section-rule"></div>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-card-label">NLP & Machine Learning</div>
-                <div class="skill-tags">
-                    <span class="skill-tag">NER</span>
-                    <span class="skill-tag">Entity Linking</span>
-                    <span class="skill-tag">Info Extraction</span>
-                    <span class="skill-tag">Text Classification</span>
-                    <span class="skill-tag">Knowledge Graphs</span>
-                    <span class="skill-tag">Transformers</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-card-label">Frameworks & Libraries</div>
-                <div class="skill-tags">
-                    <span class="skill-tag">PyTorch</span>
-                    <span class="skill-tag">HuggingFace</span>
-                    <span class="skill-tag">scikit-learn</span>
-                    <span class="skill-tag">spaCy</span>
-                    <span class="skill-tag">NLTK</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-card-label">Programming</div>
-                <div class="skill-tags">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Bash</span>
-                    <span class="skill-tag">Git</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-card-label">Geo & Data</div>
-                <div class="skill-tags">
-                    <span class="skill-tag">Geotagging</span>
-                    <span class="skill-tag">Geo-disambiguation</span>
-                    <span class="skill-tag">Data Annotation</span>
-                    <span class="skill-tag">Pandas</span>
-                </div>
+            <div class="item-description">
+                Specialization in advanced NLP techniques and machine learning methodologies, with focus on modern language models, deep learning architectures, and automatic language processing systems.
             </div>
         </div>
 
-        <div style="margin-top: 48px;">
-            <div class="section-head" style="margin-bottom: 24px;">
-                <span class="section-label">Languages</span>
-                <div class="section-rule"></div>
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Bachelor's Degree in Computer Science (L3)</div>
+                    <div class="item-institution">University of Strasbourg</div>
+                    <div class="item-location">Strasbourg, France</div>
+                </div>
+                <div class="item-date">2022–2023</div>
             </div>
-            <div class="lang-row">
-                <div class="lang-item">
-                    <div class="lang-name">Wolof</div>
-                    <div class="lang-level">Native</div>
-                </div>
-                <div class="lang-item">
-                    <div class="lang-name">Français</div>
-                    <div class="lang-level">Fluent</div>
-                </div>
-                <div class="lang-item">
-                    <div class="lang-name">English</div>
-                    <div class="lang-level">B2 — Professional</div>
-                </div>
+            <div class="item-description">
+                Advanced study in algorithms and programming, building strong foundations in computational thinking, software development, and computer science theory.
             </div>
         </div>
-    </section>
 
-    <footer>
-        <span>© 2025 Baye Lahad Mbacke</span>
-        <span>·</span>
-        <span>Nantes, France</span>
-        <span>·</span>
-        <a href="mailto:lahadmbacke00@gmail.com">lahadmbacke00@gmail.com</a>
-    </footer>
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Bachelor's Degree in Mathematics-Computer Science</div>
+                    <div class="item-institution">Cheikh Anta Diop University of Dakar</div>
+                    <div class="item-location">Dakar, Senegal</div>
+                </div>
+                <div class="item-date">2018–2022</div>
+            </div>
+            <div class="item-description">
+                Comprehensive training in mathematical foundations and computer science fundamentals, providing strong analytical and problem-solving skills across both domains.
+            </div>
+        </div>
+    </div>
 
-</main>
+    <div class="section">
+        <h2>Professional Experience</h2>
+        
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Assistant Data Scientist – Research & Development</div>
+                    <div class="item-institution">Ouest-France</div>
+                    <div class="item-location">Rennes, Brittany, France</div>
+                </div>
+                <div class="item-date">Sept. 2024–Present</div>
+            </div>
+            <div class="item-description">
+                Working on geotagging systems for identifying location references from address fragments in journalistic articles. Developing entity linking systems for geographical locations and conducting knowledge extraction projects including named entity recognition and relationship mapping. Specializing in geographical entity disambiguation for addresses, places, monuments, and cities.
+            </div>
+        </div>
+
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Research Intern</div>
+                    <div class="item-institution">Laboratoire des Sciences du Numérique de Nantes (LS2N)</div>
+                    <div class="item-location">Nantes, France</div>
+                </div>
+                <div class="item-date">Jan. 2024–May 2024</div>
+            </div>
+            <div class="item-description">
+                Conducted comparative analysis of named entity recognition systems on press articles. Applied machine learning techniques for key information extraction, participated in annotation and analysis of structured and unstructured data, and evaluated different approaches in automatic language processing.
+            </div>
+        </div>
+
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Academic Project - DEFT2013 Competition</div>
+                    <div class="item-institution">Nantes University</div>
+                    <div class="item-location">Nantes, France</div>
+                </div>
+                <div class="item-date">Feb. 2024–Mar. 2024</div>
+            </div>
+            <div class="item-description">
+                Developed classification models for recipe categorization (Main Course, Appetizer, Dessert) using natural language processing and machine learning techniques. Implemented classification systems based on recipe titles and instructions.
+            </div>
+        </div>
+
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Academic Project - Autoencoders and Classification</div>
+                    <div class="item-institution">University of Strasbourg</div>
+                    <div class="item-location">Strasbourg, France</div>
+                </div>
+                <div class="item-date">Apr. 2023–May 2023</div>
+            </div>
+            <div class="item-description">
+                Evaluated the effectiveness of autoencoders for tabular data classification. Implemented neural networks for data compression and representation, built compression functions in reduced-dimension latent spaces, and conducted comparative analysis of classification performance.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section">
+        <h2>Languages</h2>
+        <div class="languages-section">
+            <div class="language-item">
+                <div class="language-name">Wolof</div>
+                <div class="language-level">Native Language</div>
+            </div>
+            <div class="language-item">
+                <div class="language-name">French</div>
+                <div class="language-level">Fluent</div>
+            </div>
+            <div class="language-item">
+                <div class="language-name">English</div>
+                <div class="language-level">Read, Written, Spoken (B2 level)</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
