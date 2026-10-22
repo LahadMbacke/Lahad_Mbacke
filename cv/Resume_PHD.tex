@@ -1,0 +1,126 @@
+% CV de Baye Lahad Mbacke -- compiler avec : pdflatex Resume_PHD.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1.8cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage[hidelinks,pdftitle={Baye Lahad Mbacke -- CV},pdfauthor={Baye Lahad Mbacke}]{hyperref}
+
+\definecolor{accent}{HTML}{0066CC}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\newcommand{\cvsection}[1]{%
+  \vspace{10pt}{\Large\color{accent}#1}\par\vspace{-6pt}%
+  {\color{accent}\rule{\linewidth}{0.8pt}}\par\vspace{4pt}}
+
+% \cventry{institution}{lieu}{intitulé}{dates}
+\newcommand{\cventry}[4]{%
+  \begin{tabularx}{\linewidth}{@{}X r@{}}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4}
+  \end{tabularx}\par}
+
+\newenvironment{cvitems}{%
+  \begin{list}{--}{\setlength{\leftmargin}{1.5em}\setlength{\itemsep}{1pt}
+  \setlength{\parsep}{0pt}\setlength{\topsep}{2pt}}}{\end{list}\vspace{4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\fontsize{24}{28}\selectfont\color{accent} Baye Lahad Mbacke}\\[6pt]
+  Doctorant en Informatique -- Nantes Université, LS2N\\[2pt]
+  8 boulevard Mendès France, Nantes, France \textbullet{} 06 01 32 80 22\\[2pt]
+  \href{mailto:lahadmbacke00@gmail.com}{lahadmbacke00@gmail.com} \textbullet{}
+  \href{https://lahadmbacke.github.io/Lahad_Mbacke/}{Portfolio} \textbullet{}
+  \href{https://linkedin.com/in/baye-lahad-mbacke}{LinkedIn} \textbullet{}
+  \href{https://github.com/LahadMbacke}{GitHub} \textbullet{}
+  \href{https://huggingface.co/Lahad}{Hugging Face}
+\end{center}
+
+\vspace{4pt}
+Doctorant à Nantes Université depuis mars 2026, au sein du Laboratoire des Sciences du Numérique
+de Nantes (LS2N). Mes travaux portent sur des méthodes efficaces et frugales d'extraction et de
+structuration automatiques d'informations sur les événements culturels, afin de connecter les
+acteurs des industries culturelles et créatives à leurs publics.
+
+\cvsection{Formation Académique}
+
+\cventry{Nantes Université -- LS2N (équipe TALN) \& LIA}{Nantes, France}
+        {Doctorat en Informatique (École doctorale MaSTIC)}{Mars 2026--Aujourd'hui}
+\textit{Extraction et structuration automatique d'événements culturels : une approche efficace et
+frugale pour connecter les acteurs des ICC et leurs publics}
+\begin{cvitems}
+  \item Direction : Richard Dufour (LS2N, Nantes Université) et Vincent Labatut (LIA, Avignon Université)
+  \item Partenaire industriel : ideactiv (plateforme française d'indexation culturelle)
+  \item Détection des listes d'événements sur les sites d'acteurs culturels, identification des
+        événements, extraction et consolidation de leurs informations (titre, date, lieu, prix,
+        réservation, etc.), sans hallucination ni recours à des services tiers coûteux
+\end{cvitems}
+
+\cventry{Nantes Université}{Nantes, France}
+        {Master ATAL (Apprentissage et Traitement Automatique de la Langue)}{2023--2025}
+Spécialisation en techniques avancées de TAL et d'apprentissage automatique\par\vspace{6pt}
+
+\cventry{Université de Strasbourg}{Strasbourg, France}{L3 en Informatique}{2022--2023}
+Approfondissement en algorithmique et programmation\par\vspace{6pt}
+
+\cventry{Université Cheikh Anta Diop de Dakar}{Dakar, Sénégal}
+        {Licence en Mathématiques-Informatique}{2018--2022}
+Formation aux fondamentaux en sciences mathématiques et informatiques
+
+\cvsection{Expérience Professionnelle}
+
+\cventry{Ouest-France}{Rennes, France}
+        {Assistant Data Scientist -- Recherche \& Développement (alternance)}{Sept. 2024--Sept. 2025}
+\begin{cvitems}
+  \item Geotagging : identification de références de localisation à partir de bribes d'adresse
+        dans des articles journalistiques, et rattachement à des tags de lieux
+  \item Extraction de connaissances : reconnaissance et mise en relation d'entités nommées
+  \item Désambiguïsation d'entités géographiques (adresse, place, monument, ville, etc.)
+\end{cvitems}
+
+\cventry{Laboratoire des Sciences du Numérique de Nantes (LS2N)}{Nantes, France}
+        {Stagiaire Recherche}{Janv. 2024--Mai 2024}
+\begin{cvitems}
+  \item Comparaison de systèmes de reconnaissance d'entités nommées sur des articles de presse
+  \item Apprentissage automatique pour l'extraction d'informations clés
+  \item Annotation et analyse de données structurées et non structurées
+\end{cvitems}
+
+\cvsection{Projets Académiques}
+
+\cventry{Nantes Université}{Nantes, France}
+        {Compétition DEFT2013 -- Classification de recettes de cuisine}{Févr. 2024--Mars 2024}
+\begin{cvitems}
+  \item Modèles de classification de recettes (plat principal, entrée, dessert) à partir des
+        titres et des instructions, par des méthodes de TAL et d'apprentissage automatique
+\end{cvitems}
+
+\cventry{Université de Strasbourg}{Strasbourg, France}
+        {Auto-encodeurs et classification}{Avr. 2023--Mai 2023}
+\begin{cvitems}
+  \item Évaluation de l'intérêt des auto-encodeurs pour la classification de données tabulaires
+  \item Analyse comparative des performances avec et sans compression dans un espace latent réduit
+\end{cvitems}
+
+\cvsection{Compétences Techniques}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+  \textbf{Machine \& Deep Learning} & PyTorch, Scikit-learn, LLM, Fine-tuning, Quantization, Distillation \\
+  \textbf{TAL} & spaCy, NLTK, LangChain, RAG, Agents, Reconnaissance d'entités nommées \\
+  \textbf{Programmation} & Python, R, Java, C/C++ \\
+  \textbf{Bases de données} & SQL, MySQL, Oracle, PostgreSQL, MongoDB
+\end{tabularx}
+
+\cvsection{Langues}
+\textbf{Wolof} : langue maternelle \quad\textbullet\quad
+\textbf{Français} : courant \quad\textbullet\quad
+\textbf{Anglais} : B2
+
+\cvsection{Centres d'Intérêt}
+\textbf{Lecture} : journaux, actualités technologiques, veille informatique \quad\textbullet\quad
+\textbf{Sport} : football
+
+\end{document}
