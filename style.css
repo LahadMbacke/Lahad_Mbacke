@@ -309,3 +309,14 @@ a:hover {
         text-align: left;
     }
 }
+
+.lang-switch {
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--border);
+}
+
+.nav .lang-switch a.current {
+    color: var(--text);
+    font-weight: 600;
+}
